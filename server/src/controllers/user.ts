@@ -1,6 +1,6 @@
-import User from "src/models/user";
+import User from "../models/user";
 import express from "express";
-
+import bcrypt from "bcrypt";
 interface userModel {
   email: string;
   username: string;
@@ -8,7 +8,7 @@ interface userModel {
 }
 
 // Register a user
-const register = async (
+const register =  async (
   // used generics to access req.body, read more on generics
   req: express.Request<object, object, userModel>,
   res: express.Response
@@ -16,15 +16,21 @@ const register = async (
   try {
     const { email, username, password } = req.body;
     if (!email || !username || !password) {
-      throw new Error();
+      throw new Error("No username or password");
     }
-    const newUser = await User.create({ email, username, password });
+    const salt = 10;
+    const hashedPass = await bcrypt.hash(password, salt);
 
-    return res.status(200).json({ newUser });
+    const user = new User ({email, username, password: hashedPass});
+    const newUser = await user.save();
+
+    return res.status(201).json(newUser);
+
   } catch (error) {
-    return res.status(400).json({ msg: "Bad request" });
+
+    return res.status(400).json(error);
   }
 };
 
 
-export {register };
+export { register };

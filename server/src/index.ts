@@ -1,18 +1,16 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import router from "./routes/user";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
-const MONGO_URL=process.env.MONGO_URI;
+app.use(express.json());
 
-app.get("/ping", (_req, res) => {
-  res.send("hi");
-});
-
+app.use("/api/v1", router);
 app.listen(PORT, () => {
   mongoose
-    .connect(MONGO_URL)
-    .then(() => console.log(console.error(`listening on poert ${PORT}`)))
+    .connect(process.env.MONGO_URI || "")
+    .then(() => console.log(`Listening on port ${PORT}`))
     .catch((error) => console.log(error));
 });
