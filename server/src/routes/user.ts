@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { register } from "../controllers/user";
+import { login, register } from "../controllers/user";
 const router = Router();
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.route("/register").post(register);
-router.route("/session").post();
+router.route("/login").post(login);
 
 export default router;
 
