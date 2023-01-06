@@ -1,7 +1,33 @@
-import React from "react";
-import secure from "../assets/secure.svg"
-
+import { ChangeEvent, FormEvent, useState } from "react";
+import secure from "../assets/secure.svg";
+import loginService from "../services/login";
 const Login = () => {
+  const [user, setUser] = useState({ username: "", email: "", password: "" });
+  const [loggedUser, setloggedUser] = useState(null);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setUser({ ...user, [target.name]: target.value });
+  };
+
+  const handleLogin = async (e: FormEvent) => {
+      e.preventDefault();
+      if (!user.email || !user.password) {
+        console.log("Email or password is missing");
+        return;
+      }
+      const email = user.email;
+      const password = user.password;
+      console.log(email, password)
+      const userRes = await loginService.loginUser({
+        email,
+        password,
+      });
+      console.log(userRes)
+      setloggedUser(userRes);
+      setUser({ email: "", password: "", username: "" });
+      
+    
+  };
   return (
     <section className="h-screen">
       <div className="container px-6 py-12 h-full">
@@ -10,20 +36,26 @@ const Login = () => {
             <img src={secure} className="w-full" alt="Phone image" />
           </div>
           <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="mb-6">
                 <input
                   type="text"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Email address"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="mb-6">
                 <input
                   type="password"
+                  name="password"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password"
+                  value={user.password}
+                  onChange={handleChange}
                 />
               </div>
               <button
