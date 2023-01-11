@@ -1,4 +1,4 @@
-import logo from "../../public/logo.svg";
+import logo from "../assets/logo.svg";
 const Navbar = () => {
   const toggleMobile = () => {
     const mobile = document.querySelector(".mobile-menu");
