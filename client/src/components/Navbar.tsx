@@ -1,4 +1,5 @@
 import logo from "../assets/logo.svg";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const toggleMobile = () => {
     const mobile = document.querySelector(".mobile-menu");
@@ -39,12 +40,7 @@ const Navbar = () => {
             >
               About
             </a>
-            <a
-              href=""
-              className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
-            >
-              Login
-            </a>
+           <Link className = "block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition" to="/login">Login</Link>
           </div>
         </div>
       </div>
