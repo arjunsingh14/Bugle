@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import secure from "../assets/secure.svg";
 import loginService from "../services/login";
-import { FormField } from "./FormField";
+import { FormField } from "../components/FormField";
 const Login = () => {
   const initialState = { username: "", email: "", password: "" };
   const [register, setRegister] = useState(false);
