@@ -2,9 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/user";
+import cors from "cors";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1", router);
