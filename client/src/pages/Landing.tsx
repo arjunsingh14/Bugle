@@ -4,7 +4,7 @@ const Landing = () => {
     <div className="mt-20">
       <div className="flex w-full flex-wrap-reverse items-center justify-center gap-x-10">
         <section>
-          <h1 className= "text-4xl">
+          <h1 className="text-4xl">
             Choose your <br></br>
             <span className="font-bold">trusted</span> sources
           </h1>
