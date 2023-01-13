@@ -1,6 +1,13 @@
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../features/store";
+interface userState {
+  username: string;
+  token: string;
+}
 const Navbar = () => {
+  const { username } = useSelector<RootState, userState>((state) => state.auth);
   const toggleMobile = () => {
     const mobile = document.querySelector(".mobile-menu");
     mobile?.classList.toggle("hidden");
@@ -28,29 +35,35 @@ const Navbar = () => {
         </div>
         <div className="hidden w-full md:flex md:items-center md:w-auto md:mt-3 md: mr-10">
           <div className="text-md lg:flex-grow">
-            <a
-              href=""
+            <Link
+              to="/"
               className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
             >
               Home
-            </a>
+            </Link>
             <a
               href=""
               className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
             >
               About
             </a>
-           <Link className = "block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition" to="/login">Login</Link>
+            {username ? (
+              <h1>{username}</h1>
+            ) : (
+              <Link
+                className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
+                to="/login"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>
       <div className="md:hidden hidden mobile-menu mt-1 bg-secondary rounded-sm">
         <ul>
           <li className="active hover:bg-primary px-5">
-            <a
-              href="index.html"
-              className="block text-sm px-2 py-4"
-            >
+            <a href="index.html" className="block text-sm px-2 py-4">
               Home
             </a>
           </li>
