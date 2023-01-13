@@ -4,14 +4,14 @@ const initialState = {
   username: "",
   token: "",
 };
-
+/*slice contains the type, the initial state and all its reducers which
+into the store along with other reducers*/
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      console.log(action.payload);
-      state.username = action.payload.username;
+      state.username = action.payload;
       state.token = action.payload.token;
     },
   },

@@ -32,8 +32,9 @@ const register = (
 
     const user = new User({ email, username, password });
     const newUser = await user.save();
+    //signing the user's id so we can pull it from the jwt payload when we verify the token later
     const token = user.createJWT({ _id: user._id });
-
+    newUser.password = undefined;
     res.status(201).json({ newUser, token });
   })();
 };
@@ -46,7 +47,9 @@ const login = (
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     const correctPass =
-      user === null ? null : await bcrypt.compare(password, user.password as string);
+      user === null
+        ? null
+        : await bcrypt.compare(password, user.password as string);
 
     if (!(user && correctPass)) {
       throw new Error("Invalid credentials");
@@ -55,6 +58,7 @@ const login = (
     const userSigned: userSigned = {
       _id: user._id,
     };
+    //signing the user's id so we can pull it from the jwt payload when we verify the token later
     const token = user.createJWT(userSigned);
     user.password = undefined;
     res.status(200).json({ user, token });
