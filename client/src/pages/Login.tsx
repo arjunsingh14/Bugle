@@ -2,11 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import secure from "../assets/secure.svg";
 import loginService from "../services/login";
 import { FormField } from "../components/FormField";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/auth";
 const Login = () => {
+  const dispatch = useDispatch();
   const initialState = { username: "", email: "", password: "" };
   const [register, setRegister] = useState(false);
   const [user, setUser] = useState(initialState);
-  const [loggedUser, setloggedUser] = useState(null);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     setUser({ ...user, [target.name]: target.value });
@@ -14,19 +16,16 @@ const Login = () => {
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
+    const { email, password} = user
     if (!user.email || !user.password) {
       console.log("Email or password is missing");
       return;
     }
-    const email = user.email;
-    const password = user.password;
-    console.log(email, password);
-    const userRes = await loginService.loginUser({
+    const data = await loginService.loginUser({
       email,
       password,
     });
-    console.log(userRes);
-    setloggedUser(userRes);
+    dispatch(loginUser({ token: data.token, username: data.user.username }));
     setUser(initialState);
   };
 
