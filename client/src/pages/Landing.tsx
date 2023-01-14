@@ -1,5 +1,27 @@
 import newspaper from "../assets/newspaper.svg";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchArticles } from "../features/articles";
+import { AppDispatch } from "../features/store";
+import { RootState } from "../features/store";
+import { useSelector } from "react-redux";
+import Card from "../components/Card";
+interface articleState {
+  topHeadlines: any;
+  filteredHeadlines: object[];
+  sources: string[];
+  country: string;
+}
 const Landing = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchArticles());
+  }, []);
+
+  const { topHeadlines } = useSelector<RootState, articleState>(
+    (state) => state.article
+  );
+
   return (
     <div className="mt-20">
       <div className="flex w-full flex-wrap-reverse items-center justify-center gap-x-10">
@@ -26,6 +48,16 @@ const Landing = () => {
           <img src={newspaper} className="object-containe" alt="" />
         </div>
       </div>
+      <section className="px-5">
+        <h1>Top headlines in the us</h1>
+        <div className="grid grid-cols-3 gap-5">
+
+        {topHeadlines.map((article: any) => {
+          const {title, urlToImage, description, url} = article;
+          return (<Card title={title} imgSrc={urlToImage} summary={description} url={url}></Card>)
+        })}
+        </div>
+      </section>
     </div>
   );
 };
