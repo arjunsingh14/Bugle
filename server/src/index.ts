@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "./routes/user";
+import userRouter from "./routes/user";
+import articleRouter from "./routes/articles";
 import cors from "cors";
 dotenv.config();
 const app = express();
@@ -10,7 +11,9 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/v1", router);
+app.use("/api/v1", userRouter);
+app.use("/api/v1", articleRouter);
+
 app.listen(PORT, () => {
   mongoose
     .connect(process.env.MONGO_URI || "")
