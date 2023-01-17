@@ -31,11 +31,11 @@ const register = (
     }
 
     const user = new User({ email, username, password });
-    const newUser = await user.save();
+    await user.save();
     //signing the user's id so we can pull it from the jwt payload when we verify the token later
     const token = user.createJWT({ _id: user._id });
-    newUser.password = undefined;
-    res.status(201).json({ newUser, token });
+    user.password = undefined;
+    res.status(201).json({ user, token });
   })();
 };
 // login and create a session
