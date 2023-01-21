@@ -39,14 +39,14 @@ const SelectorForm = () => {
         <div>
           <div className="flex flex-row">
             {availSources.map((item) => (
-              <div className="px-2" key={item.id}>
+              <div className="px-1 lg:px-4" key={item.id}>
                 <input
                   value={item.name}
                   name={item.id}
                   type="checkbox"
                   onChange={handleCheck}
                 />
-                <span>{item.name}</span>
+                <span className="text-xs md:text-xl">{item.name}</span>
               </div>
             ))}
           </div>

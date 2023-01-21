@@ -14,7 +14,7 @@ const Navbar = () => {
         </div>
         <div className="block md:hidden mt-3">
           <button
-            className=" mr-5 flex items-center px-3 py-2 border rounded  hover:text-white hover:border-white menu-btn"
+            className=" mr-5 flex items-center px-3 py-2 border rounded"
             onClick={toggleMobile}
           >
             <svg
@@ -44,28 +44,23 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="md:hidden hidden mobile-menu mt-1 bg-secondary rounded-sm">
+      <div className="md:hidden hidden mobile-menu mt-1 bg-primary rounded-sm">
         <ul>
           <li className="active hover:bg-primary px-5">
-            <a href="index.html" className="block text-sm px-2 py-4">
-              Home
-            </a>
-          </li>
-          <li className="px-5">
-            <a
-              href="#services"
-              className="block text-sm px-2 py-4 transition duration-300"
+            <Link
+              to="/"
+              className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
             >
-              About
-            </a>
+              Home
+            </Link>
           </li>
           <li className="px-5">
-            <a
-              href="#about"
-              className="block text-sm px-2 py-4 transition duration-300"
+            <Link
+              className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
+              to="/login"
             >
               Login
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
