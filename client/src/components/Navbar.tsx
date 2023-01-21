@@ -1,13 +1,7 @@
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../features/store";
-interface userState {
-  username: string;
-  token: string;
-}
+import React from "react";
 const Navbar = () => {
-  const { username } = useSelector<RootState, userState>((state) => state.auth);
   const toggleMobile = () => {
     const mobile = document.querySelector(".mobile-menu");
     mobile?.classList.toggle("hidden");
@@ -41,22 +35,12 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <a
-              href=""
+            <Link
               className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
+              to="/login"
             >
-              About
-            </a>
-            {username ? (
-              <h1>{username}</h1>
-            ) : (
-              <Link
-                className="block mt-4 md:inline-block md:mt-0 hover:text-white mx-5 transition"
-                to="/login"
-              >
-                Login
-              </Link>
-            )}
+              Login
+            </Link>
           </div>
         </div>
       </div>
