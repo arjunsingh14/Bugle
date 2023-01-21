@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "http://localhost:3001/api/v1/";
+const baseURL = "/api/v1/";
 interface loginCredentials {
   email: string;
   password: string;

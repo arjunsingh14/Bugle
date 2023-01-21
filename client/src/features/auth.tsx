@@ -31,7 +31,7 @@ const initialState: state = {
   filteredHeadlines: [],
 };
 
-const baseUrl = "http://localhost:3001/api/v1";
+const baseUrl = "/api/v1";
 
 export const fetchArticles = createAsyncThunk("fetchArticles", async () => {
   try {
