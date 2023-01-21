@@ -9,6 +9,7 @@ interface User {
   email: string;
   username: string;
   password: string | undefined;
+  sources: string [];
   createJWT(userSign: unknown):string;
   _id: Schema.Types.ObjectId;
 }
@@ -17,6 +18,7 @@ const UserSchema = new Schema<User>({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
+  sources: { type: [String], required:true}
 });
 
 UserSchema.pre("save", async function () {

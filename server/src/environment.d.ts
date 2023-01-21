@@ -11,4 +11,5 @@ declare global {
     }
   }
 }
+declare module "express-async-errors";
 export {};

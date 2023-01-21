@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { Schema } from "mongoose";
 
 // import jwt from "jsonwebtoken";
+
 interface userModel {
   email: string;
   username: string;
@@ -29,8 +30,8 @@ const register = (
     if (existingUser) {
       throw new Error("User already exists");
     }
-
-    const user = new User({ email, username, password });
+    const sources: string[] = [];
+    const user = new User({ email, username, password, sources });
     await user.save();
     //signing the user's id so we can pull it from the jwt payload when we verify the token later
     const token = user.createJWT({ _id: user._id });
