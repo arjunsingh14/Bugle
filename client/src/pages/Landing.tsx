@@ -52,21 +52,24 @@ const Landing = () => {
                 control which sources you like.
               </p>
             </div>
-            <Link
-              className="block w-1/3 rounded-full text-white bg-secondary px-4 py-4 mt-3 hover:bg-black transition"
-              to="/login"
-              onClick={() => dispatch(regOrLog({ isReg: true }))}
-            >
-              Sign up
-            </Link>
+            <button className="block w-1/3 rounded-full text-white bg-secondary px-4 py-4 mt-3 hover:bg-black transition">
+              <Link
+                to="/login"
+                onClick={() => dispatch(regOrLog({ isReg: true }))}
+              >
+                Sign up
+              </Link>
+            </button>
           </section>
           <div className="shrink-1 sm:px-5">
             <img src={newspaper} className="object-containe" alt="" />
           </div>
         </div>
-        <section className="flex flex-col flex-wrap items-center px-5">
-          <h1 className="text-4xl mb-6">Top headlines in the us</h1>
-          <div className="lg:grid lg:grid-cols-3 md:grid-cols-1 gap-5">
+        <section className="flex flex-col flex-wrap items-center md:px-5 mt-5">
+          <h1 className="sm: text-3xl lg:text-4xl mb-6">
+            Top headlines in the us
+          </h1>
+          <div className="grid lg:grid lg:grid-cols-3 grid-cols-1 gap-5 px-2">
             {topHeadlines.map((article: any) => {
               const { title, urlToImage, description, url } = article;
               return (

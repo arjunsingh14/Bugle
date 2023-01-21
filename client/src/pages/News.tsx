@@ -18,7 +18,7 @@ const News = () => {
     <div>
       <Form></Form>
       <section className="flex flex-col items-center px-5">
-        <h1 className="text-4xl mb-6">Headlines from your sources</h1>
+        <h1 className="text-xl md:text-4xl mt-3 mb-2">Headlines from your sources</h1>
         <div className="grid lg:grid-cols-3 md:grid-cols-1 gap-5">
           {filteredHeadlines.map((article: any) => {
             const { title, urlToImage, description, url } = article;
