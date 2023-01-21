@@ -1,8 +1,8 @@
 import axios from "axios";
-import express from "express";
-import jwt from "jsonwebtoken";
+import * as express from "express";
+import * as jwt from "jsonwebtoken";
 import User from "../models/user";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 interface JwtPayload {

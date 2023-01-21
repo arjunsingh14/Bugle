@@ -1,4 +1,5 @@
-import express, { NextFunction } from "express";
+import * as express from "express";
+import { NextFunction } from "express";
 const unknownEndpoint = (_req: express.Request, response: express.Response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };

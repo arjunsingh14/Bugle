@@ -7,9 +7,13 @@
     "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "ts-node": "ts-node",
-    "start": "ts-node ./src/index.ts",
+    "start": "node ./src/index.js",
     "dev": "ts-node-dev ./src/index.ts",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "build:ui": "rm -rf dist && cd ../client/ && npm run build && cp -r dist ../server",
+    "deploy": "tsc ./src/index.ts && fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs"
   },
   "author": "",
   "license": "ISC",

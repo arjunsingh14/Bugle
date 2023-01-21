@@ -1,6 +1,6 @@
 import User from "../models/user";
-import express from "express";
-import bcrypt from "bcrypt";
+import * as express from "express";
+import * as bcrypt from "bcrypt";
 import { Schema } from "mongoose";
 
 // import jwt from "jsonwebtoken";
